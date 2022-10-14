@@ -1,6 +1,8 @@
 import { httpBatchLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
+import { createReactQueryHooks } from '@trpc/react/query';
 import type { AppRouter } from '../server/routers/_app';
+
 
 function getBaseUrl() {
   if (typeof window !== 'undefined')
@@ -18,6 +20,8 @@ function getBaseUrl() {
   // assume localhost
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
+
+// export const trpc = createReactQueryHooks<AppRouter>();
 
 export const trpc = createTRPCNext<AppRouter>({
   config({ ctx }) {
@@ -40,6 +44,6 @@ export const trpc = createTRPCNext<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    **/
-  ssr: true,
+  ssr: false,
 });
 // => { useQuery: ..., useMutation: ...}

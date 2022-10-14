@@ -1,5 +1,8 @@
 import { z } from 'zod';
 import { router, publicProcedure } from '../trpc';
+import { getOptionsForVote } from '@/utils/getRandomPokemon';
+
+import { PokemonClient } from 'pokenode-ts';
 
 export const appRouter = router({
   hello: publicProcedure
@@ -13,6 +16,17 @@ export const appRouter = router({
         greeting: `hello ${input?.text ?? 'world'}, you stupid git!`,
       };
     }),
+  getPokemonById: publicProcedure
+    .query(async () => {
+      const [first, second] = getOptionsForVote();
+
+      const api = new PokemonClient();
+      const firstPokemon = await api.getPokemonById(first)
+      const secondPokemon = await api.getPokemonById(second)
+      
+      return {pokemonOne: firstPokemon, pokemonTwo: secondPokemon};
+  })
+    
 });
 
 // export type definition of API
