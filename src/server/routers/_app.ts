@@ -13,7 +13,7 @@ export const appRouter = router({
     )
     .query(({ input }) => {
       return {
-        greeting: `hello ${input?.text ?? 'world'}, you stupid git!`,
+        greeting: `hello ${input?.text ?? 'world'}`,
       };
     }),
   getPokemonById: publicProcedure
