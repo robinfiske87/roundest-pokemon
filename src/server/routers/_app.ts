@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { router, publicProcedure } from '../trpc';
 import { getOptionsForVote } from '@/utils/getRandomPokemon';
 
+import { prisma } from '@/server/utils/prisma';
+
 import { PokemonClient } from 'pokenode-ts';
 
 export const appRouter = router({
@@ -23,10 +25,22 @@ export const appRouter = router({
       const api = new PokemonClient();
       const firstPokemon = await api.getPokemonById(first)
       const secondPokemon = await api.getPokemonById(second)
+
+      const bothPokemon = [{name:firstPokemon.name, sprites: firstPokemon.sprites, id: first}, {name: secondPokemon.name, sprites: secondPokemon.sprites, id: second}]
       
-      return {pokemonOne: firstPokemon, pokemonTwo: secondPokemon};
-  })
-    
+      return { pokemonOne: bothPokemon[0], pokemonTwo: bothPokemon[1] } ;
+  }),
+  castVote: publicProcedure
+    .input(z.object({
+      votedFor: z.number(),
+      votedAgainst: z.number(),
+    }))
+    .mutation(async ({input}) => {
+      resolve() {
+        const voteInDb = awa
+        return { success: true }
+      } 
+    })
 });
 
 // export type definition of API
