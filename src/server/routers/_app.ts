@@ -36,6 +36,7 @@ export const appRouter = router({
       votedAgainst: z.number(),
     }))
     .mutation(async ({input}) => {
+      console.log(input)
         const voteInDb = await prisma.vote.create({
           data: {
             ...input
