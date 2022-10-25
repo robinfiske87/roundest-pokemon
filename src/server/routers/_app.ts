@@ -36,11 +36,13 @@ export const appRouter = router({
       votedAgainst: z.number(),
     }))
     .mutation(async ({input}) => {
-      resolve() {
-        const voteInDb = awa
-        return { success: true }
-      } 
-    })
+        const voteInDb = await prisma.vote.create({
+          data: {
+            ...input
+          }
+        });
+    return { success: true, vote: voteInDb }
+}),
 });
 
 // export type definition of API
