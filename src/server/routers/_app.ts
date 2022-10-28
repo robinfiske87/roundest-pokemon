@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { router, publicProcedure } from '../trpc';
+// import * as trcp from '@trpc/server';
 import { getOptionsForVote } from '@/utils/getRandomPokemon';
 
 import { prisma } from '@/server/utils/prisma';
 
 import { PokemonClient } from 'pokenode-ts';
 
-export const appRouter = router({
+export const appRouter =
+router({
   hello: publicProcedure
     .input(
       z.object({
