@@ -41,7 +41,8 @@ router({
       console.log(input)
         const voteInDb = await prisma.vote.create({
           data: {
-            ...input
+            votedAgainstId: input.votedAgainst,
+            votedForId: input.votedFor,
           }
         });
     return { success: true, vote: voteInDb }
