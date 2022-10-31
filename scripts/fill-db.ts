@@ -15,7 +15,7 @@ const doBackfill = async () => {
 
   const creation = await prisma.pokemon.createMany({ data: formattedPokemon });
 
-  console.log("creation?", creation);
+  console.log("Creation?", creation);
 
 }
 

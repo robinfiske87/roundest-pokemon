@@ -61,7 +61,7 @@ const PokemonListing: React.FC<{pokemon: PokemonFromServer, vote: () => void}> =
   return (
 
     <div className="flex flex-col items-center">
-    <Image alt="pokemon1" className="w-64 h-64" src={props.pokemon.sprites.front_default || "/srcTextFiller"} width={256} height={256} layout="fixed" />
+    <Image alt="pokemon1" className="w-64 h-64" src={props.pokemon.spriteUrl || "/srcTextFiller"} width={256} height={256} layout="fixed" />
     <div className="text-xl text-center capitalize mt-[-2rem] ">{props.pokemon.name}</div>
     <button className={btn} onClick={() => props.vote()}>Rounder</button>
   </div>
