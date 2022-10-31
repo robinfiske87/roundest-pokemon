@@ -55,6 +55,8 @@ export default function Home() {
   );
 }
 
+
+
 type PokemonFromServer = inferPokemonQueryResponse["pokemonOne"];
 const PokemonListing: React.FC<{pokemon: PokemonFromServer, vote: () => void}> = (props) => {
 
