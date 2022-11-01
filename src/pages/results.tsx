@@ -25,22 +25,33 @@ const getPokemonInOrder = async () => {
 
 type PokemonQueryResults = AsyncReturnType<typeof getPokemonInOrder>;
 
-const PokemonListing: React.FC<{pokemon: PokemonQueryResults[number] }> = (props) => {
-    return <div className="flex border-b p-2">
-        <Image 
-            alt="pokemonImage" 
-            className="w-64 h-64" 
-            src={props.pokemon.spriteUrl} 
-            width={64} height={64} layout="fixed" />
-            <div className="capitalize">{props.pokemon.name}</div>
+const generateCountPercentage = (pokemon: PokemonQueryResults[number]) => {
+    const {votesFor, votesAgainst} = pokemon._count;
+    if(votesFor + votesAgainst === 0) return 0;
+    return votesFor / (votesFor + votesAgainst) * 100;
+}
+
+const PokemonListing: React.FC<{pokemon: PokemonQueryResults[number] }> = ({ pokemon, }) => {
+    return (
+        <div className="flex border-b p-2 items-center justify-between ">
+            <div className="flex items-center">
+                <Image 
+                    alt="pokemonImage" 
+                    className="w-64 h-64" 
+                    src={pokemon.spriteUrl} 
+                    width={64} height={64} layout="fixed" />
+                <div className="capitalize">{pokemon.name}</div>
+            </div>
+            <div className="pr-3">{generateCountPercentage(pokemon) + "%"}</div>
         </div>
+    );
 }
 
 const ResultsPage: React.FC<{
     pokemon: AsyncReturnType<typeof getPokemonInOrder>;
     }> = (props) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
             <h2 className="text-2xl p-4">Results</h2>
             <div className="p-2"></div>
             <div className="flex flex-col w-full max-w-2xl border">
