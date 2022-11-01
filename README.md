@@ -7,6 +7,7 @@ First, run the development server:
 ```bash
 npm run dev
 ```
--[] Persist data fetched from PokemonAPI
--[] Create the results page with counting/sorting
--[] Use next/image to handle caching and better rendering
+-[x] Persist data fetched from PokemonAPI
+-[x] Create the results page with counting/sorting
+-[x] Use next/image to handle caching and better rendering
+-[ ] Better loading state between votes
